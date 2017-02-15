@@ -41,9 +41,6 @@ app.controller('indexController', function($scope) {
     }
 });
 },{"../src/cart":3,"../src/goods":4}],2:[function(require,module,exports){
-var SalesTax = require('./tax/salesTax');
-var ImportedTax = require('./tax/importedTax');
-
 function CartGoods(goods,count,totalTax,priceExcludingTax,priceIncludingTax) {
     this.goods = goods;
 
@@ -62,7 +59,7 @@ function CartGoods(goods,count,totalTax,priceExcludingTax,priceIncludingTax) {
 
 module.exports = CartGoods;
 
-},{"./tax/importedTax":5,"./tax/salesTax":6}],3:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 var CartGoods = require('./cart-goods');
 var Tools = require('./tools');
 var SalesTax = require('./tax/salesTax');
@@ -87,7 +84,7 @@ function Cart(filters,salesTaxRate,importedTaxRate) {
     // 进口税率
     this.importedTaxRate = importedTaxRate;
 }
-// 判断如果已存在该商品，则count加1;
+// 判断是否已存在该商品;
 var filterCartGoodsList = function(cartGoodsList,goods,count,totalTax,priceExcludingTax,priceIncludingTax) {
     var isExist = false;
     var index;

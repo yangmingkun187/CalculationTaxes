@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/cart.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">src/</a> cart.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">57.14% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>24/42</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/2</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">60% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>3/5</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">57.14% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>24/42</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line medium'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var Goods = require('./goods');
+var SalesTax = require('./tax/salesTax');
+var ImportedTax = require('./tax/importedTax');
+&nbsp;
+function Cart(filters,salesTaxRate,importedTaxRate) {
+    // 商品集合
+    this.cartGoods = [];
+&nbsp;
+    // 总共税款
+    this.totalTaxes = 0;
+&nbsp;
+    // 总共价格
+    this.total = 0;
+&nbsp;
+    // 不需要付款的商品种类数组
+    this.filters = filters;
+&nbsp;
+    // 销售税率
+    this.salesTaxRate = salesTaxRate;
+&nbsp;
+    // 进口税率
+    this.importedTaxRate = importedTaxRate;
+}
+&nbsp;
+Cart.prototype.addCart = <span class="fstat-no" title="function not covered" >function (goods) {</span>
+<span class="cstat-no" title="statement not covered" >    var cartGoods = this.cartGoods;</span>
+&nbsp;
+    // 得到该商品的总税
+<span class="cstat-no" title="statement not covered" >    var totalTax = this.getTotalTax(goods);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    for(var i = 0; i &lt; cartGoods.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >        if(goods.id === cartGoods[i]) {</span>
+<span class="cstat-no" title="statement not covered" >            cartGoods[i].count++;</span>
+<span class="cstat-no" title="statement not covered" >            cartGoods[i].totalTax += cartGoods[i].totalTax;</span>
+<span class="cstat-no" title="statement not covered" >            cartGoods[i].priceExcludingTax += cartGoods[i].priceExcludingTax;</span>
+<span class="cstat-no" title="statement not covered" >            cartGoods[i].priceIncludingTax += cartGoods[i].priceIncludingTax;</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            var priceExcludingTax = goods.price;</span>
+<span class="cstat-no" title="statement not covered" >            var priceIncludingTax = goods.price + totalTax;</span>
+<span class="cstat-no" title="statement not covered" >            var count = 1;</span>
+<span class="cstat-no" title="statement not covered" >            cartGoods.push(new cartGoods(goods,count,totalTax,priceExcludingTax,priceIncludingTax));</span>
+        }
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return cartGoods;</span>
+};
+&nbsp;
+// 得到每条商品总共的税
+Cart.prototype.getTotalTax = <span class="fstat-no" title="function not covered" >function (cartItem) {</span>
+    // 初始化税
+<span class="cstat-no" title="statement not covered" >    var salesTax = new SalesTax(this.salesTaxRate, this.filters);</span>
+<span class="cstat-no" title="statement not covered" >    var importedTax = new ImportedTax(this.importedTaxRate);</span>
+&nbsp;
+    // 得到销售税价
+<span class="cstat-no" title="statement not covered" >    var salesTaxPrice = salesTax.getTax(cartItem.goods.kind, cartItem.price);</span>
+&nbsp;
+    // 得到进口税价
+<span class="cstat-no" title="statement not covered" >    var importedTaxPrice = importedTax.getTax(cartItem.goods.isImportDuty, cartItem.price);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return (salesTaxPrice + importedTaxPrice).toFixed(2);</span>
+};
+&nbsp;
+Cart.prototype.getToalTaxes = function () {
+    var cartGoods = this.cartGoods, totalTaxes = 0;
+    console.log(cartGoods);
+    for(var i = 0, len = cartGoods.length; i &lt; len; i++) {
+        totalTaxes += cartGoods[i].totalTax;
+    }
+&nbsp;
+    return totalTaxes.toFixed(2);
+};
+&nbsp;
+Cart.prototype.getTotal = function () {
+    var cartGoods = this.cartGoods, total = 0;
+&nbsp;
+    for(var i = 0, len = cartGoods.length; i &lt; len; i++) {
+        total += cartGoods[i].priceIncludingTax;
+    }
+&nbsp;
+    return total.toFixed(2);
+};
+&nbsp;
+module.exports = Cart;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Feb 15 2017 19:59:11 GMT+0800 (CST)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

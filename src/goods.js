@@ -5,7 +5,7 @@ function Goods(id, name, price, kind, isImportDuty) {
   // 商品名称 String
   this.name = name;
 
-  // 商品价格 Number
+  // 商品价格
   this.price = price || 0.00;
 
   // 商品种类 Number 0为食物，1为书籍，2为药品，100为其他
@@ -15,7 +15,7 @@ function Goods(id, name, price, kind, isImportDuty) {
   this.isImportDuty = isImportDuty;
 }
 
-Goods.loadAllItemInfos = function () {
+Goods.loadAllGoodsInfos = function () {
   return [
   new Goods(0,'book', 12.49, 1, false),
   new Goods(1,'music CD', 14.99, 100, false),

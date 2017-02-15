@@ -1,10 +1,11 @@
 var Goods = require('./goods');
+var CartGoods = require('./cart-goods');
 var SalesTax = require('./tax/salesTax');
 var ImportedTax = require('./tax/importedTax');
 
 function Cart(filters,salesTaxRate,importedTaxRate) {
     // 商品集合
-    this.cartGoods = [];
+    this.cartGoodsList = [];
 
     // 总共税款
     this.totalTaxes = 0;
@@ -21,60 +22,72 @@ function Cart(filters,salesTaxRate,importedTaxRate) {
     // 进口税率
     this.importedTaxRate = importedTaxRate;
 }
-
-Cart.prototype.addCart = function (goods) {
-    var cartGoods = this.cartGoods;
-
-    // 得到该商品的总税
-    var totalTax = this.getTotalTax(goods);
-
-    for(var i = 0; i < cartGoods.length; i++) {
-        if(goods.id === cartGoods[i]) {
-            cartGoods[i].count++;
-            cartGoods[i].totalTax += cartGoods[i].totalTax;
-            cartGoods[i].priceExcludingTax += cartGoods[i].priceExcludingTax;
-            cartGoods[i].priceIncludingTax += cartGoods[i].priceIncludingTax;
+// 字符串的数字自增
+var increment = function(a) {
+    return (a * 2).toFixed(2);
+};
+// 判断如果已存在该商品，则count加1;
+var filterCartGoodsList = function(cartGoodsList,goods,count,totalTax,priceExcludingTax,priceIncludingTax) {
+    for(var i = 0; i < cartGoodsList.length; i++) {
+        if(goods.id === cartGoodsList[i].goods.id) {
+            cartGoodsList[i].count++;
+            cartGoodsList[i].totalTax = increment(cartGoodsList[i].totalTax);
+            cartGoodsList[i].priceExcludingTax = increment(cartGoodsList[i].priceExcludingTax);
+            cartGoodsList[i].priceIncludingTax = increment(cartGoodsList[i].priceIncludingTax);
         } else {
-            var priceExcludingTax = goods.price;
-            var priceIncludingTax = goods.price + totalTax;
-            var count = 1;
-            cartGoods.push(new cartGoods(goods,count,totalTax,priceExcludingTax,priceIncludingTax));
+            cartGoodsList.push(new CartGoods(goods,count,totalTax,priceExcludingTax,priceIncludingTax));
         }
     }
+    return cartGoodsList;
+};
 
-    return cartGoods;
+Cart.prototype.addCart = function (goods) {
+    var cartGoodsList = this.cartGoodsList;
+
+    // 得到该商品的总税
+    var totalTax = this.getTotalTax(goods).toFixed(2);
+
+    var priceExcludingTax = goods.price;
+    var priceIncludingTax = (+goods.price + +totalTax).toFixed(2);
+    var count = 1;
+
+    if(cartGoodsList.length === 0) {
+        cartGoodsList.push(new CartGoods(goods,count,totalTax,priceExcludingTax,priceIncludingTax));
+    } else {
+        cartGoodsList = filterCartGoodsList(cartGoodsList,goods,count,totalTax,priceExcludingTax,priceIncludingTax);
+    }
+    return cartGoodsList;
 };
 
 // 得到每条商品总共的税
-Cart.prototype.getTotalTax = function (cartItem) {
+Cart.prototype.getTotalTax = function (cartGoods) {
     // 初始化税
     var salesTax = new SalesTax(this.salesTaxRate, this.filters);
     var importedTax = new ImportedTax(this.importedTaxRate);
 
     // 得到销售税价
-    var salesTaxPrice = salesTax.getTax(cartItem.goods.kind, cartItem.price);
+    var salesTaxPrice = +salesTax.getTax(cartGoods.kind, cartGoods.price);
 
     // 得到进口税价
-    var importedTaxPrice = importedTax.getTax(cartItem.goods.isImportDuty, cartItem.price);
+    var importedTaxPrice = +importedTax.getTax(cartGoods.isImportDuty, cartGoods.price);
 
-    return (salesTaxPrice + importedTaxPrice).toFixed(2);
+    return salesTaxPrice + importedTaxPrice;
 };
 
 Cart.prototype.getToalTaxes = function () {
-    var cartGoods = this.cartGoods, totalTaxes = 0;
-    console.log(cartGoods);
-    for(var i = 0, len = cartGoods.length; i < len; i++) {
-        totalTaxes += cartGoods[i].totalTax;
+    var cartGoodsList = this.cartGoodsList, totalTaxes = 0;
+    for(var i = 0, len = cartGoodsList.length; i < len; i++) {
+        totalTaxes += +cartGoodsList[i].totalTax;
     }
 
     return totalTaxes.toFixed(2);
 };
 
 Cart.prototype.getTotal = function () {
-    var cartGoods = this.cartGoods, total = 0;
-
-    for(var i = 0, len = cartGoods.length; i < len; i++) {
-        total += cartGoods[i].priceIncludingTax;
+    var cartGoodsList = this.cartGoodsList, total = 0;
+    console.log(cartGoodsList);
+    for(var i = 0, len = cartGoodsList.length; i < len; i++) {
+        total += +cartGoodsList[i].priceIncludingTax;
     }
 
     return total.toFixed(2);

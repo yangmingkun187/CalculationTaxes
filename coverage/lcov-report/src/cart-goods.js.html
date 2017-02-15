@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for src/goods.js</title>
+    <title>Code coverage report for src/cart-goods.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -16,28 +16,28 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../index.html">all files</a> / <a href="index.html">src/</a> goods.js
+      <a href="../index.html">all files</a> / <a href="index.html">src/</a> cart-goods.js
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">88.89% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>8/9</span>
+        <span class='fraction'>9/9</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">50% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>1/2</span>
+        <span class='fraction'>4/8</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">50% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>1/2</span>
+        <span class='fraction'>1/1</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">88.89% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>8/9</span>
+        <span class='fraction'>9/9</span>
       </div>
     </div>
   </div>
@@ -63,20 +63,10 @@
 18
 19
 20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+21</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -93,52 +83,26 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">function Goods(id, name, price, kind, isImportDuty) {
-  // 商品编号 Number
-  this.id = id;
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var SalesTax = require('./tax/salesTax');
+var ImportedTax = require('./tax/importedTax');
 &nbsp;
-  // 商品名称 String
-  this.name = name;
+function CartGoods(goods,count,totalTax,priceExcludingTax,priceIncludingTax) {
+    this.goods = goods;
 &nbsp;
-  // 商品价格 String
-  this.price = price || <span class="branch-1 cbranch-no" title="branch not covered" >'0.00';</span>
+    // 商品数量
+    this.count = count || <span class="branch-1 cbranch-no" title="branch not covered" >1;</span>
 &nbsp;
-  // 商品种类 Number 0为食物，1为书籍，2为药品，100为其他
-  this.kind = kind;
+    // 总税款
+    this.totalTax = totalTax || <span class="branch-1 cbranch-no" title="branch not covered" >0;</span>
 &nbsp;
-  // 商品是否为进口 Boolean
-  this.isImportDuty = isImportDuty;
+    // 不含税总价
+    this.priceExcludingTax = priceExcludingTax || <span class="branch-1 cbranch-no" title="branch not covered" >0;</span>
+&nbsp;
+    // 含税总价
+    this.priceIncludingTax = priceIncludingTax || <span class="branch-1 cbranch-no" title="branch not covered" >0;</span>
 }
 &nbsp;
-Goods.loadAllGoodsInfos = <span class="fstat-no" title="function not covered" >function () {</span>
-<span class="cstat-no" title="statement not covered" >  return [</span>
-  new Goods(0,'book', '12.49', 1, false),
-  new Goods(1,'music CD', '14.99', 100, false),
-  new Goods(2,'chocolate', '0.85', 0, false),
-  new Goods(3,'imported box of chocolates', '10.00', 0, true),
-  new Goods(4,'imported bottle of perfume', '47.5', 100, true),
-  new Goods(5,'imported bottle of perfume', '27.99', 100, true),
-  new Goods(6,'bottle of perfume', '18.99', 100, false),
-  new Goods(7,'packet of headache pills', '9.75', 2, false),
-  new Goods(8,'box of imported chocolates', '11.25', 0, true)
-  ];
-};
-&nbsp;
-module.exports = Goods;
+module.exports = CartGoods;
 &nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->

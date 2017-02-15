@@ -1,0 +1,26 @@
+{
+  "name": "calculationTaxes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "istanbul cover _mocha ./test/**"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yangmingkun187/CalculationTaxes.git"
+  },
+  "author": "jasonyang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yangmingkun187/CalculationTaxes/issues"
+  },
+  "homepage": "https://github.com/yangmingkun187/CalculationTaxes",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0",
+    "sinon": "^1.17.7",
+    "sinon-chai": "^2.8.0"
+  }
+}

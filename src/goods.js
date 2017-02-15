@@ -21,7 +21,7 @@ Goods.loadAllGoodsInfos = function () {
   new Goods(1,'music CD', '14.99', 100, false),
   new Goods(2,'chocolate', '0.85', 0, false),
   new Goods(3,'imported box of chocolates', '10.00', 0, true),
-  new Goods(4,'imported bottle of perfume', '47.5', 100, true),
+  new Goods(4,'imported bottle of perfume', '47.50', 100, true),
   new Goods(5,'imported bottle of perfume', '27.99', 100, true),
   new Goods(6,'bottle of perfume', '18.99', 100, false),
   new Goods(7,'packet of headache pills', '9.75', 2, false),

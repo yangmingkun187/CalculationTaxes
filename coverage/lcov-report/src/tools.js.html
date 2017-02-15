@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for src/cart-goods.js</title>
+    <title>Code coverage report for src/tools.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -16,13 +16,13 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../index.html">all files</a> / <a href="index.html">src/</a> cart-goods.js
+      <a href="../index.html">all files</a> / <a href="index.html">src/</a> tools.js
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">80% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>9/9</span>
+        <span class='fraction'>8/10</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">50% </span>
@@ -32,12 +32,12 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>1/1</span>
+        <span class='fraction'>2/2</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">80% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>9/9</span>
+        <span class='fraction'>8/10</span>
       </div>
     </div>
   </div>
@@ -63,46 +63,49 @@
 18
 19
 20
-21</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
+21
+22</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var SalesTax = require('./tax/salesTax');
-var ImportedTax = require('./tax/importedTax');
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">module.exports = {
 &nbsp;
-function CartGoods(goods,count,totalTax,priceExcludingTax,priceIncludingTax) {
-    this.goods = goods;
+    // to nearest 0.05
+    formatNumber : function(num) {
+        var result;
+        var remainder = (num * 100) % 10;
+        <span class="missing-if-branch" title="if path not taken" >I</span>if(remainder &gt; 0 &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >remainder &lt; 5)</span> {
+<span class="cstat-no" title="statement not covered" >            result = num.replace(3,5);</span>
+        } else <span class="missing-if-branch" title="if path not taken" >I</span>if (remainder &gt; 5 &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >remainder &lt;=9)</span> {
+<span class="cstat-no" title="statement not covered" >            result = ((Math.round((num * 100) / 10) + '0')/100).toFixed(2);</span>
+        } else {
+            result = num;
+        }
+        return result;
+    },
 &nbsp;
-    // 商品数量
-    this.count = count || <span class="branch-1 cbranch-no" title="branch not covered" >1;</span>
-&nbsp;
-    // 总税款
-    this.totalTax = totalTax || <span class="branch-1 cbranch-no" title="branch not covered" >'0.00';</span>
-&nbsp;
-    // 不含税总价
-    this.priceExcludingTax = priceExcludingTax || <span class="branch-1 cbranch-no" title="branch not covered" >'0.00';</span>
-&nbsp;
-    // 含税总价
-    this.priceIncludingTax = priceIncludingTax || <span class="branch-1 cbranch-no" title="branch not covered" >'0.00';</span>
-}
-&nbsp;
-module.exports = CartGoods;
+    // 字符串的数字自增
+    increment : function(oldValue, newValue) {
+        return (+oldValue + +newValue).toFixed(2);
+    }
+};
 &nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->

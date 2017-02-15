@@ -1,7 +1,7 @@
 describe('Tax',function() {
     describe('#getTax', function() {
         var Tax = require('../../src/tax/tax');
-        var tax = new Tax(10);
+        var tax = new Tax(0.1);
 
         it('should return correct tax', function() {
             var expect_tax = tax.getTax(100);
@@ -19,7 +19,7 @@ describe('salesTax',function() {
     describe('#getTax', function() {
         var SalesTax = require('../../src/tax/salesTax');
         var filters = [0,1,2];
-        var salesTax = new SalesTax(10,filters);
+        var salesTax = new SalesTax(0.1,filters);
 
         it('should return correct tax', function() {
             var expect_tax = salesTax.getTax(100, 14.99);
@@ -36,7 +36,7 @@ describe('salesTax',function() {
 describe('importedTax',function() {
     describe('#getTax', function() {
         var ImportedTax = require('../../src/tax/importedTax');
-        var importedTax = new ImportedTax(5);
+        var importedTax = new ImportedTax(0.05);
         var isImportDuty = true;
         it('should return correct tax', function() {
             var expect_tax = importedTax.getTax(isImportDuty,10.00);

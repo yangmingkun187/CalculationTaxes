@@ -1,5 +1,5 @@
-var Goods = require('./goods');
 var CartGoods = require('./cart-goods');
+var Tools = require('./tools');
 var SalesTax = require('./tax/salesTax');
 var ImportedTax = require('./tax/importedTax');
 
@@ -22,34 +22,36 @@ function Cart(filters,salesTaxRate,importedTaxRate) {
     // 进口税率
     this.importedTaxRate = importedTaxRate;
 }
-// 字符串的数字自增
-var increment = function(a) {
-    return (a * 2).toFixed(2);
-};
 // 判断如果已存在该商品，则count加1;
 var filterCartGoodsList = function(cartGoodsList,goods,count,totalTax,priceExcludingTax,priceIncludingTax) {
+    var isExist = false;
+    var index;
     for(var i = 0; i < cartGoodsList.length; i++) {
         if(goods.id === cartGoodsList[i].goods.id) {
-            cartGoodsList[i].count++;
-            cartGoodsList[i].totalTax = increment(cartGoodsList[i].totalTax);
-            cartGoodsList[i].priceExcludingTax = increment(cartGoodsList[i].priceExcludingTax);
-            cartGoodsList[i].priceIncludingTax = increment(cartGoodsList[i].priceIncludingTax);
-        } else {
-            cartGoodsList.push(new CartGoods(goods,count,totalTax,priceExcludingTax,priceIncludingTax));
+            isExist = true;
+            index = i;
         }
     }
+    if(isExist) {
+        cartGoodsList[index].count += count;
+        cartGoodsList[index].totalTax = Tools.increment(+cartGoodsList[index].totalTax,totalTax);
+        cartGoodsList[index].priceExcludingTax = Tools.increment(cartGoodsList[index].priceExcludingTax, priceExcludingTax);
+        cartGoodsList[index].priceIncludingTax = Tools.increment(cartGoodsList[index].priceIncludingTax, priceIncludingTax);
+    } else {
+        cartGoodsList.push(new CartGoods(goods,count,totalTax,priceExcludingTax,priceIncludingTax));
+    }
+
     return cartGoodsList;
 };
 
-Cart.prototype.addCart = function (goods) {
+Cart.prototype.addCart = function (goods, count) {
     var cartGoodsList = this.cartGoodsList;
 
     // 得到该商品的总税
-    var totalTax = this.getTotalTax(goods).toFixed(2);
+    var totalTax = (this.getTotalTax(goods) * count).toFixed(2);
 
-    var priceExcludingTax = goods.price;
-    var priceIncludingTax = (+goods.price + +totalTax).toFixed(2);
-    var count = 1;
+    var priceExcludingTax = (goods.price * count).toFixed(2);
+    var priceIncludingTax = (+goods.price * count + +totalTax).toFixed(2);
 
     if(cartGoodsList.length === 0) {
         cartGoodsList.push(new CartGoods(goods,count,totalTax,priceExcludingTax,priceIncludingTax));
@@ -71,10 +73,10 @@ Cart.prototype.getTotalTax = function (cartGoods) {
     // 得到进口税价
     var importedTaxPrice = +importedTax.getTax(cartGoods.isImportDuty, cartGoods.price);
 
-    return salesTaxPrice + importedTaxPrice;
+    return Tools.formatNumber((salesTaxPrice + importedTaxPrice).toFixed(2));
 };
 
-Cart.prototype.getToalTaxes = function () {
+Cart.prototype.getTotalTaxes = function () {
     var cartGoodsList = this.cartGoodsList, totalTaxes = 0;
     for(var i = 0, len = cartGoodsList.length; i < len; i++) {
         totalTaxes += +cartGoodsList[i].totalTax;
@@ -85,7 +87,6 @@ Cart.prototype.getToalTaxes = function () {
 
 Cart.prototype.getTotal = function () {
     var cartGoodsList = this.cartGoodsList, total = 0;
-    console.log(cartGoodsList);
     for(var i = 0, len = cartGoodsList.length; i < len; i++) {
         total += +cartGoodsList[i].priceIncludingTax;
     }

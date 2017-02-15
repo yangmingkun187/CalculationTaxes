@@ -8,13 +8,13 @@ function CartGoods(goods,count,totalTax,priceExcludingTax,priceIncludingTax) {
     this.count = count || 1;
 
     // 总税款
-    this.totalTax = totalTax || 0;
+    this.totalTax = totalTax || '0.00';
 
     // 不含税总价
-    this.priceExcludingTax = priceExcludingTax || 0;
+    this.priceExcludingTax = priceExcludingTax || '0.00';
 
     // 含税总价
-    this.priceIncludingTax = priceIncludingTax || 0;
+    this.priceIncludingTax = priceIncludingTax || '0.00';
 }
 
 module.exports = CartGoods;

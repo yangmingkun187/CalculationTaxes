@@ -20,24 +20,24 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">98% </span>
+        <span class="strong">98.04% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>49/50</span>
+        <span class='fraction'>50/51</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">75% </span>
+        <span class="strong">66.67% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>3/4</span>
+        <span class='fraction'>4/6</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>7/7</span>
+        <span class='fraction'>6/6</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">98% </span>
+        <span class="strong">98.04% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>49/50</span>
+        <span class='fraction'>50/51</span>
       </div>
     </div>
   </div>
@@ -139,7 +139,8 @@
 94
 95
 96
-97</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+97
+98</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
@@ -165,11 +166,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">3×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
@@ -190,7 +194,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-yes">2×</span>
-<span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-yes">1×</span>
@@ -228,15 +231,14 @@
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var Goods = require('./goods');
-var CartGoods = require('./cart-goods');
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var CartGoods = require('./cart-goods');
+var Tools = require('./tools');
 var SalesTax = require('./tax/salesTax');
 var ImportedTax = require('./tax/importedTax');
 &nbsp;
@@ -259,34 +261,36 @@ function Cart(filters,salesTaxRate,importedTaxRate) {
     // 进口税率
     this.importedTaxRate = importedTaxRate;
 }
-// 字符串的数字自增
-var increment = function(a) {
-    return (a * 2).toFixed(2);
-};
 // 判断如果已存在该商品，则count加1;
 var filterCartGoodsList = function(cartGoodsList,goods,count,totalTax,priceExcludingTax,priceIncludingTax) {
+    var isExist = false;
+    var index;
     for(var i = 0; i &lt; cartGoodsList.length; i++) {
         <span class="missing-if-branch" title="else path not taken" >E</span>if(goods.id === cartGoodsList[i].goods.id) {
-            cartGoodsList[i].count++;
-            cartGoodsList[i].totalTax = increment(cartGoodsList[i].totalTax);
-            cartGoodsList[i].priceExcludingTax = increment(cartGoodsList[i].priceExcludingTax);
-            cartGoodsList[i].priceIncludingTax = increment(cartGoodsList[i].priceIncludingTax);
-        } else {
-<span class="cstat-no" title="statement not covered" >            cartGoodsList.push(new CartGoods(goods,count,totalTax,priceExcludingTax,priceIncludingTax));</span>
+            isExist = true;
+            index = i;
         }
     }
+    <span class="missing-if-branch" title="else path not taken" >E</span>if(isExist) {
+        cartGoodsList[index].count += count;
+        cartGoodsList[index].totalTax = Tools.increment(+cartGoodsList[index].totalTax,totalTax);
+        cartGoodsList[index].priceExcludingTax = Tools.increment(cartGoodsList[index].priceExcludingTax, priceExcludingTax);
+        cartGoodsList[index].priceIncludingTax = Tools.increment(cartGoodsList[index].priceIncludingTax, priceIncludingTax);
+    } else {
+<span class="cstat-no" title="statement not covered" >        cartGoodsList.push(new CartGoods(goods,count,totalTax,priceExcludingTax,priceIncludingTax));</span>
+    }
+&nbsp;
     return cartGoodsList;
 };
 &nbsp;
-Cart.prototype.addCart = function (goods) {
+Cart.prototype.addCart = function (goods, count) {
     var cartGoodsList = this.cartGoodsList;
 &nbsp;
     // 得到该商品的总税
-    var totalTax = this.getTotalTax(goods).toFixed(2);
+    var totalTax = (this.getTotalTax(goods) * count).toFixed(2);
 &nbsp;
-    var priceExcludingTax = goods.price;
-    var priceIncludingTax = (+goods.price + +totalTax).toFixed(2);
-    var count = 1;
+    var priceExcludingTax = (goods.price * count).toFixed(2);
+    var priceIncludingTax = (+goods.price * count + +totalTax).toFixed(2);
 &nbsp;
     if(cartGoodsList.length === 0) {
         cartGoodsList.push(new CartGoods(goods,count,totalTax,priceExcludingTax,priceIncludingTax));
@@ -308,10 +312,10 @@ Cart.prototype.getTotalTax = function (cartGoods) {
     // 得到进口税价
     var importedTaxPrice = +importedTax.getTax(cartGoods.isImportDuty, cartGoods.price);
 &nbsp;
-    return salesTaxPrice + importedTaxPrice;
+    return Tools.formatNumber((salesTaxPrice + importedTaxPrice).toFixed(2));
 };
 &nbsp;
-Cart.prototype.getToalTaxes = function () {
+Cart.prototype.getTotalTaxes = function () {
     var cartGoodsList = this.cartGoodsList, totalTaxes = 0;
     for(var i = 0, len = cartGoodsList.length; i &lt; len; i++) {
         totalTaxes += +cartGoodsList[i].totalTax;
@@ -322,7 +326,6 @@ Cart.prototype.getToalTaxes = function () {
 &nbsp;
 Cart.prototype.getTotal = function () {
     var cartGoodsList = this.cartGoodsList, total = 0;
-    console.log(cartGoodsList);
     for(var i = 0, len = cartGoodsList.length; i &lt; len; i++) {
         total += +cartGoodsList[i].priceIncludingTax;
     }
@@ -337,7 +340,7 @@ module.exports = Cart;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Feb 15 2017 21:04:52 GMT+0800 (CST)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Feb 15 2017 18:30:44 GMT+0800 (CST)
 </div>
 </div>
 <script src="../prettify.js"></script>

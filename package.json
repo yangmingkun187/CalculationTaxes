@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/yangmingkun187/CalculationTaxes",
   "devDependencies": {
+    "browserify": "^14.1.0",
     "chai": "^3.5.0",
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",

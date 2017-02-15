@@ -3,9 +3,55 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>calculationTaxes</title>
-  <script src="//cdn.bootcss.com/angular.js/1.6.0/angular.min.js"></script>
+  <link rel="stylesheet" href="../style/index.css"/>
 </head>
-<body ng-controller="myController">
-
+<body ng-controller="indexController">
+  <div class="goods-list">
+    <ul class="title">
+      <li style="width: 50%">Goods</li>
+      <li style="width: 10%">Price</li>
+      <li style="width: 25%">Quantity</li>
+      <li style="width: 14%">Action</li>
+    </ul>
+    <div class="content">
+      <ul  ng-repeat="goods in goodsList track by $index" ng-cloak>
+        <li style="width: 50%" ng-bind="goods.name"></li>
+        <li style="width: 10%" ng-bind="goods.price"></li>
+        <li style="width: 25%">
+          <input type="number" ng-init="goods.inputCount = 1" ng-model="goods.inputCount"/>
+        </li>
+        <li class="action" style="width: 14%" ng-click="addToCart($event,goods,goods.inputCount)">Add to Cart </li>
+      </ul>
+    </div>
+  </div>
+  <div class="btn-wrapper">
+    <button class="reset" ng-click="reset($event)">Reset</button>
+    <button ng-click="checkout($event)">Checkout</button>
+  </div>
+  <div class="cart-list" ng-if="showCart">
+    <ul class="title">
+      <li style="width: 50%">Goods & Quantity</li>
+      <li style="width: 20%">Price excluding tax</li>
+      <li style="width: 9%">Tax</li>
+      <li style="width: 20%">Price including tax</li>
+    </ul>
+    <div class="content">
+      <ul  ng-repeat="item in cartList track by $index" ng-cloak>
+        <li style="width: 50%" ng-bind="item.goods.name + ' (' + item.count + '）'"></li>
+        <li style="width: 20%" ng-bind="item.priceExcludingTax"></li>
+        <li style="width: 9%" ng-bind="item.totalTax"></li>
+        <li style="width: 20%" ng-bind="item.priceIncludingTax"></li>
+      </ul>
+    </div>
+    <div class="total">
+      <span ng-bind="'Sales Taxes:' + totalTaxes + ','"></span>
+      <span ng-bind="'Total:' + total"></span>
+    </div>
+  </div>
+<script src="//cdn.bootcss.com/angular.js/1.6.0/angular.min.js"></script>
+<script>
+  var app = angular.module('app', []);
+</script>
+<script src="../app.js"></script>
 </body>
 </html>

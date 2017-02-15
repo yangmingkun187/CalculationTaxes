@@ -1,4 +1,5 @@
 var Tax = require('./tax');
+var Tools = require('../tools');
 
 function SalesTax(rate,filters) {
     Tax.call(this, rate);
@@ -19,7 +20,7 @@ SalesTax.prototype.getTax = function(kind,price) {
         }
     }
 
-    return isNeedTax ? (price * this.rate /100).toFixed(2) : 0;
+    return isNeedTax ? Tools.formatNumber((price * this.rate).toFixed(2)) : 0;
 };
 
 module.exports = SalesTax;

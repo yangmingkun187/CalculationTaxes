@@ -4,7 +4,7 @@ function Tax(rate) {
 }
 
 Tax.prototype.getTax = function(price) {
-    return (price * this.rate /100).toFixed(2);
+    return (price * this.rate).toFixed(2);
 };
 
 module.exports = Tax;

@@ -22,7 +22,7 @@ function Cart(filters,salesTaxRate,importedTaxRate) {
     // 进口税率
     this.importedTaxRate = importedTaxRate;
 }
-// 判断如果已存在该商品，则count加1;
+// 判断是否已存在该商品;
 var filterCartGoodsList = function(cartGoodsList,goods,count,totalTax,priceExcludingTax,priceIncludingTax) {
     var isExist = false;
     var index;

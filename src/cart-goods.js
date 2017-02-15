@@ -1,6 +1,3 @@
-var SalesTax = require('./tax/salesTax');
-var ImportedTax = require('./tax/importedTax');
-
 function CartGoods(goods,count,totalTax,priceExcludingTax,priceIncludingTax) {
     this.goods = goods;
 

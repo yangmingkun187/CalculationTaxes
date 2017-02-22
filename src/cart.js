@@ -78,18 +78,18 @@ Cart.prototype.getTotalTax = function (cartGoods) {
 
 Cart.prototype.getTotalTaxes = function () {
     var cartGoodsList = this.cartGoodsList, totalTaxes = 0;
-    for(var i = 0, len = cartGoodsList.length; i < len; i++) {
-        totalTaxes += +cartGoodsList[i].totalTax;
-    }
+    cartGoodsList.forEach(function(cartGoods) {
+        totalTaxes += +cartGoods.totalTax;
+    })
 
     return totalTaxes.toFixed(2);
 };
 
 Cart.prototype.getTotal = function () {
     var cartGoodsList = this.cartGoodsList, total = 0;
-    for(var i = 0, len = cartGoodsList.length; i < len; i++) {
-        total += +cartGoodsList[i].priceIncludingTax;
-    }
+    cartGoodsList.forEach(function(cartGoods) {
+        total += +cartGoods.priceIncludingTax;
+    })
 
     return total.toFixed(2);
 };

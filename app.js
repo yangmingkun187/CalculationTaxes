@@ -138,20 +138,39 @@ Cart.prototype.getTotalTax = function (cartGoods) {
     return Tools.formatNumber((salesTaxPrice + importedTaxPrice).toFixed(2));
 };
 
+var forEach = function(array, callback) {
+    for(var i = 0; i < array.length; i++) {
+        callback(array[i]);
+    }
+};
+
 Cart.prototype.getTotalTaxes = function () {
     var cartGoodsList = this.cartGoodsList, totalTaxes = 0;
-    for(var i = 0, len = cartGoodsList.length; i < len; i++) {
-        totalTaxes += +cartGoodsList[i].totalTax;
-    }
+    // forEach(cartGoodsList, function(cartGoods) {
+    //     totalTaxes += +cartGoods.totalTax;
+    // });
+    cartGoodsList.forEach(function(cartGoods) {
+        totalTaxes += +cartGoods.totalTax;
+    })
+    // for(var i = 0, len = cartGoodsList.length; i < len; i++) {
+    //     totalTaxes += +cartGoodsList[i].totalTax;
+    // }
 
     return totalTaxes.toFixed(2);
 };
 
 Cart.prototype.getTotal = function () {
     var cartGoodsList = this.cartGoodsList, total = 0;
-    for(var i = 0, len = cartGoodsList.length; i < len; i++) {
-        total += +cartGoodsList[i].priceIncludingTax;
-    }
+
+    cartGoodsList.forEach(function(cartGoods) {
+        total += +cartGoods.priceIncludingTax;
+    })
+    // forEach(cartGoodsList, function(cartGoods) {
+    //     total += +cartGoods.priceIncludingTax;
+    // })
+    // for(var i = 0, len = cartGoodsList.length; i < len; i++) {
+    //     total += +cartGoodsList[i].priceIncludingTax;
+    // }
 
     return total.toFixed(2);
 };
